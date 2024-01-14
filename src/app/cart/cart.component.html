@@ -1,1 +1,5 @@
-<p>cart works!</p>
+<ul *ngIf="cartItems$ | async as cartProducts" class="grid grid-cols-4 gap-5 mt-10">
+  <li *ngFor="let cartProduct of cartProducts">
+    <product-card [product]="cartProduct"></product-card>
+  </li>
+</ul>

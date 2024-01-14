@@ -8,7 +8,7 @@ import { NavigationComponent } from './shared/layouts/navigation/navigation.comp
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ProductsComponent, NavigationComponent],
+  imports: [CommonModule, RouterOutlet, NavigationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

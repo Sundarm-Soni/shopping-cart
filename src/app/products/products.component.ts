@@ -5,6 +5,10 @@ import { IProduct } from '../models/products.interface';
 import { Observable } from 'rxjs';
 import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
 import { ProductService } from '../shared/services/product.service';
+import { Store } from '@ngrx/store';
+import { addToCart } from '../states/cart/cart.action';
+import { AppState } from '../app.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'products',
@@ -14,10 +18,16 @@ import { ProductService } from '../shared/services/product.service';
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
-  public products$!: Observable<IProduct[]>;
   private _productsService = inject(ProductService);
+  public products$!: Observable<IProduct[]>;
+
+  constructor(private _store: Store<AppState>, private _router: Router) {}
 
   public ngOnInit(): void {
     this.products$ = this._productsService.getProducts();
+  }
+
+  public addProductsToCart(product: IProduct): void {
+    this._store.dispatch(addToCart({ product }));
   }
 }

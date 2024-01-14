@@ -1,5 +1,5 @@
 <div class="max-w-72 h-auto rounded overflow-hidden flex-col mx-auto shadow-black shadow-lg">
-  <img class="w-56 block mx-auto h-60" [src]="product.image" alt="Sunset in the mountains">
+  <img class="w-56 block mx-auto h-60" width="679" height="480" [ngSrc]="product.image" alt="Sunset in the mountains" priority="">
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2">{{ product.title.substring(0, 20) }}...</div>
     <p class="text-gray-700 text-base overflow-hidden ...">
@@ -9,7 +9,7 @@
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ '$'+product.price }}</span>
   </div>
   <div class="flex flex-col gap-5">
-    <button class="bg-slate-500 w-56 mx-auto border rounded-md hover:bg-slate-600 text-white">Add to cart</button>
-    <button class="bg-green-400 w-56 mx-auto mb-5 border rounded-md hover:bg-green-700 text-white">View Product</button>
+    <button class="bg-slate-500 w-56 mx-auto border rounded-md hover:bg-slate-600 text-white" (click)="addItemToCart(product)">Add to cart</button>
+    <button class="bg-green-400 w-56 mx-auto mb-5 border rounded-md hover:bg-green-700 text-white" (click)="viewProduct()">View Product</button>
   </div>
 </div>

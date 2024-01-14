@@ -1,6 +1,6 @@
 <ul *ngIf="products$ | async as products; else loading;" class="grid grid-cols-4 gap-5 mt-10">
   @for(product of products; track $index) {
-  <li><product-card [product]="product"></product-card></li>
+  <li><product-card [product]="product" (addToCart)="addProductsToCart($event)"></product-card></li>
 }
 </ul>
 
