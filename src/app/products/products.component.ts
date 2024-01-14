@@ -4,6 +4,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { IProduct } from '../models/products.interface';
 import { Observable } from 'rxjs';
 import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
+import { ProductService } from '../shared/services/product.service';
 
 @Component({
   selector: 'products',
@@ -13,12 +14,10 @@ import { ProductCardComponent } from '../shared/components/product-card/product-
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
-  private _http = inject(HttpClient);
   public products$!: Observable<IProduct[]>;
+  private _productsService = inject(ProductService);
 
   public ngOnInit(): void {
-    this.products$ = this._http.get<IProduct[]>(
-      'https://fakestoreapi.com/products'
-    );
+    this.products$ = this._productsService.getProducts();
   }
 }

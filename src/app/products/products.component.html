@@ -1,7 +1,7 @@
-<ul *ngIf="products$ | async as products; else loading;" class="grid grid-cols-4 gap-3">
+<ul *ngIf="products$ | async as products; else loading;" class="grid grid-cols-4 gap-5 mt-10">
   @for(product of products; track $index) {
   <li><product-card [product]="product"></product-card></li>
 }
 </ul>
 
-<ng-template #loading>Loading.....</ng-template>
+<ng-template #loading><p class="flex justify-center top-0.5">Loading.....</p></ng-template>
