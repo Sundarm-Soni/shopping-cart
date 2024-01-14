@@ -5,12 +5,17 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideState, provideStore } from '@ngrx/store';
 import { cartReducer } from './states/cart/cart.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { ProductsEffects } from './states/cart/cart.effect';
+import { cartProductsFeature, productsFeature } from './states/cart/cart.selector';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
     provideStore(),
-    provideState({ name: 'cart', reducer: cartReducer })
+    provideState(cartProductsFeature),
+    provideState(productsFeature),
+    provideEffects([ProductsEffects])
   ],
 };

@@ -1,7 +1,27 @@
-<ul *ngIf="products$ | async as products; else loading;" class="grid grid-cols-4 gap-5 mt-10">
-  @for(product of products; track $index) {
-  <li><product-card [product]="product" (addToCart)="addProductsToCart($event)"></product-card></li>
+<ng-container *ngIf="products$ | async as products">
+  <ul
+    *ngIf="products.length; else noProducts"
+    class="grid grid-cols-4 gap-5 mt-10"
+  >
+    @for(product of products; track product.id) {
+    <li>
+      <product-card
+        [product]="product"
+        (addToCart)="addProductsToCart($event)"
+      ></product-card>
+    </li>
+    }
+  </ul>
+</ng-container>
+<ng-template #noProducts>
+  <div
+    class="bg-sky-300 w-72 h-40 rounded-xl text-red-400 mt-32 font-bold text-center p-10 mx-auto"
+  >
+    No products in your cart!!
+  </div>
+</ng-template>
+@if(isLoading$ | async) {
+<div
+  class="absolute left-2/4 top-2/4 border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-blue-600"
+></div>
 }
-</ul>
-
-<ng-template #loading><p class="flex justify-center top-0.5">Loading.....</p></ng-template>

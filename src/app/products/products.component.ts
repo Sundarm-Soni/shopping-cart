@@ -1,14 +1,12 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../models/products.interface';
 import { Observable } from 'rxjs';
 import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
-import { ProductService } from '../shared/services/product.service';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../states/cart/cart.action';
 import { AppState } from '../app.state';
-import { Router } from '@angular/router';
+import { isProductsLoadingSelector, selectProducts } from '../states/cart/cart.selector';
 
 @Component({
   selector: 'products',
@@ -18,13 +16,14 @@ import { Router } from '@angular/router';
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
-  private _productsService = inject(ProductService);
   public products$!: Observable<IProduct[]>;
+  public isLoading$!: Observable<boolean>;
 
-  constructor(private _store: Store<AppState>, private _router: Router) {}
+  constructor(private _store: Store<AppState>) {}
 
   public ngOnInit(): void {
-    this.products$ = this._productsService.getProducts();
+    this.isLoading$ = this._store.select(isProductsLoadingSelector);
+    this.products$ = this._store.select<IProduct[]>(selectProducts);
   }
 
   public addProductsToCart(product: IProduct): void {

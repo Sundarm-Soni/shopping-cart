@@ -14,7 +14,7 @@ export class ProductService {
   public getProducts(): Observable<IProduct[]> {
     return this._http.get<IProduct[]>('https://fakestoreapi.com/products').pipe(
       map((products) => {
-        return products.map((product) => ({ ...product, quantity: 1 }));
+        return products.map((product) => ({ ...product, quantity: 0 }));
       })
     );
   }
